@@ -12,11 +12,11 @@ cnx = mysql.connector.connect(
 cursor = cnx.cursor()
 
 # Execute a SELECT query
-query= "CREATE TABLE  test (Id varchar(20),Name varchar(20),PRIMARY KEY (ID))"
-cursor.execute(query)
-cursor.execute("show table ;")
+#query= "CREATE TABLE  test (Id varchar(20),Name varchar(20),PRIMARY KEY (ID))"
+#cursor.execute(query)
+#cursor.execute("show table ;")
 query1="insert into test (Id,Name) Values(%s,%s)"
-sql=("01233456","oussema")
+sql=("01233456","oussema2")
 cursor.execute(query1,sql)
 #creation dela table
 cnx.commit()

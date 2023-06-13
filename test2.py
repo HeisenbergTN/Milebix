@@ -4,7 +4,7 @@ import mysql.connector
 import datetime 
 
 cnx = mysql.connector.connect(
-    host='127.0.0.1',  # Replace with the actual hostname
+    host='192.168.0.168',  # Replace with the actual hostname
     user='root',  # Replace with your MySQL username
     password='Qnb1234.',  # Replace with your MySQL password
     database='milebix'  # Replace with the name of your MySQL database
@@ -16,11 +16,11 @@ command = '$User="qnbts-video\\oussema";$PWord = ConvertTo-SecureString -String 
 # Execute the PowerShell command
 #subprocess.run(['powershell.exe', '-Command', command])
 cursor=cnx.cursor()
-cursor.execute('show tables')
+#cursor.execute('show tables')
 # Read the CSV file and convert it to a dictionary
 data = {}
-sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date)"+"VALUES (%s,%s,%b,%b,%b,%s,%s,%s,%s,%s,%s,%s,%i,%f,%f,%s)"
-data2={"kkkk","kkekek",True,False,True,"jjjjj","llll","kekeke","kekekek","ekekmerkke","elellkke","ekelkjr","kzjrjkj",1,1.1,1.2,"20:20:2022"}
+sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date) VALUES (%s,%s,%b,%b,%b,%s,%s,%s,%s,%s,%s,%s,%s,%d,%f,%f,%s)"
+data2=["kkkk","kkekek",1,0,1,"kekeke","aaa","kekekek","ekekmerkke","elellkke","ekelkjr","kzjrjkj","jhjfhjd",1,1.1,1.2,datetime.datetime.now()]
 #with open('test.csv', 'r') as csvfile:
 #    reader = csv.DictReader(csvfile)
 #    x=datetime.datetime.now()
