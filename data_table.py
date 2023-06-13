@@ -12,7 +12,7 @@ cnx = mysql.connector.connect(
 cursor = cnx.cursor()
 
 # Execute a SELECT query
-query= "CREATE TABLE  zabbix_iteam (Id varchar(20),Name varchar(20),Enabled  BOOL ,State    BOOL,ErrorNoConnection  BOOL,HardwareName varchar(25),HardwareId   varchar(25), Model varchar(25),Address varchar(25), MAC varchar(15),RecorderName varchar(25),RecorderUri  varchar(25),RecorderId   varchar(25),ConfiguredRecordedFPS int,PercentRecordedOneWeek  float,UsedSpaceInGB float,Date date , PRIMARY KEY (ID))"
+query= "CREATE TABLE  zabbix_iteam (Id varchar(20),Name varchar(20),Enabled  BOOL ,State    BOOL,ErrorNoConnection  BOOL,HardwareName varchar(25),HardwareId   varchar(25), Model varchar(25),Address varchar(25), MAC varchar(15),RecorderName varchar(25),RecorderUri  varchar(25),RecorderId   varchar(25),ConfiguredRecordedFPS int,PercentRecordedOneWeek  float,UsedSpaceInGB float,Date datetime , PRIMARY KEY (ID))"
 cursor.execute(query)
 #creation dela table
 cursor.close()
