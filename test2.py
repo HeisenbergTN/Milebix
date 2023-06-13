@@ -19,7 +19,7 @@ cursor=cnx.cursor()
 #cursor.execute('show tables')
 # Read the CSV file and convert it to a dictionary
 data = {}
-sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date) VALUES (%s,%s,%b,%b,%b,%s,%s,%s,%s,%s,%s,%s,%s,%d,%f,%f,%s)"
+sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB) VALUES ('2i','kkekek',1,0,1,'kekeke','aaa','kekekek','ekekmerkke','elellkke','ekelkjr','kzjrjkj','jhjfhjd',1,1.1,1.2)"
 data2=["kkkk","kkekek",1,0,1,"kekeke","aaa","kekekek","ekekmerkke","elellkke","ekelkjr","kzjrjkj","jhjfhjd",1,1.1,1.2,datetime.datetime.now()]
 #with open('test.csv', 'r') as csvfile:
 #    reader = csv.DictReader(csvfile)
@@ -28,4 +28,5 @@ data2=["kkkk","kkekek",1,0,1,"kekeke","aaa","kekekek","ekekmerkke","elellkke","e
 #        data={row['Id'],row['Name'],row['Enabled'],row['State'],row['ErrorNoConnection'],row['HardwareName'],row['HardwareId'],row['Model'],row['Address'],row['MAC'],row['RecorderName'],row['RecorderUri'],row['RecorderId'],row['ConfiguredRecordedFPS'],row['PercentRecordedOneWeek'],row['UsedSpaceInGB'],x}
 #        cursor.execute(sql,data)
 #        print(data)
-cursor.execute(sql,data2)
+cursor.execute(sql)
+cnx.commit()
