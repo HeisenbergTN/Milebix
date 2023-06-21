@@ -4,34 +4,27 @@ import mysql.connector
 import datetime 
 
 cnx = mysql.connector.connect(
-    host='192.168.0.168',  # Replace with the actual hostname
+    host='localhost',  # Replace with the actual hostname
     user='root',  # Replace with your MySQL username
     password='Qnb1234.',  # Replace with your MySQL password
     database='milebix'  # Replace with the name of your MySQL database
 )
 print(cnx)
 # PowerShell command
-command = '$User="qnbts-video\\oussema";$PWord = ConvertTo-SecureString -String "Qnb1234." -AsPlainText -Force;$Credential = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $User, $PWord;Connect-ManagementServer -server  192.168.0.168 -Credential $Credential; Get-VmsCameraReport | Export-Csv -Path "test.csv" '
+command = '$User="qnbts-video\\oussema";$PWord = ConvertTo-SecureString -String "Qnb1234." -AsPlainText -Force;$Credential = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $User, $PWord;Connect-ManagementServer -server  127.0.0.1 -Credential $Credential; Get-VmsCameraReport | Export-Csv -Path "test.csv" -NoTypeInformation'
 #x.affiche(conn)
 # Execute the PowerShell command
-#subprocess.run(['powershell.exe', '-Command', command])
+subprocess.run(['powershell.exe', '-Command', command])
 cursor=cnx.cursor()
 #cursor.execute('show tables')
 # Read the CSV file and convert it to a dictionary
-data = {}
+data = dict()
 x=datetime.datetime.now()
 datetime_string=x.strftime("%Y%m%d%H%M%S")
 print (datetime_string)
-sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date) VALUES ('2k','kkekek',1,0,1,'kekeke','aaa','kekekek','ekekmerkke','elellkke','ekelkjr','kzjrjkj','jhjfhjd',1,1.1,1.2,"
-sql=sql + datetime_string + ")"
-data2=["kkkk","kkekek",1,0,1,"kekeke","aaa","kekekek","ekekmerkke","elellkke","ekelkjr","kzjrjkj","jhjfhjd",1,1.1,1.2,datetime.datetime.now()]
-#with open('test.csv', 'r') as csvfile:
-#    reader = csv.DictReader(csvfile)
-#    x=datetime.datetime.now()
-#    for row in reader:
-#        data={row['Id'],row['Name'],row['Enabled'],row['State'],row['ErrorNoConnection'],row['HardwareName'],row['HardwareId'],row['Model'],row['Address'],row['MAC'],row['RecorderName'],row['RecorderUri'],row['RecorderId'],row['ConfiguredRecordedFPS'],row['PercentRecordedOneWeek'],row['UsedSpaceInGB'],x}
-#        cursor.execute(sql,data)
-#        print(data)
-print (sql)
-cursor.execute(sql)
-cnx.commit()
+with open('test.csv', 'r') as csvfile:
+    reader = csv.DictReader(csvfile)
+    x=datetime.datetime.now()
+    for row in reader:
+        data={"Id":row['Id'],"Name":row['Name'],"Enabled":row['Enabled'],"State":row['State'],"ErrorNoConnection":row['ErrorNoConnection'],"HardwareName":row['HardwareName'],"HardwareId":row['HardwareId'],"Model":row['Model'],"Address":row['Address'],"MAC":row['MAC'],"RecorderName":row['RecorderName'],"RecorderUri":row['RecorderUri'],"RecorderId":row['RecorderId'],"ConfiguredRecordedFPS":row['ConfiguredRecordedFPS'],"PercentRecordedOneWeek":row['PercentRecordedOneWeek'],"UsedSpaceInGB":row['UsedSpaceInGB'],"Date":x}
+        print(data)

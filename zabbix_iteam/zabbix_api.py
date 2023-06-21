@@ -1,7 +1,7 @@
 import requests
 import sys
 import json
-filename = r"C:\Users\admin\Desktop\Milebix\zabbix_iteam"
+filename = r"C:\Users\admin\Desktop\Milebix\zabbix_iteam\example.txt"
 addr= "192.168.0.225"
 url="http://192.168.0.212/zabbix/api_jsonrpc.php"
 headers={
@@ -41,6 +41,8 @@ for i in aaa :
         if (j["ip"]==addr):
            x= i["hostid"]
            print(x)
+           break 
+    
 lines=list()
 with open(filename, "r") as file:
     
@@ -59,5 +61,16 @@ with open(filename, "r") as file:
        # key=var['result']
 
         data2= {"jsonrpc":"2.0","method":"item.create","params":{"name":nom,"hostid":"10084",'key_':ch,"type":0,"value_type":4,"interfaceid":"1","delay":30},"auth":key,"id":3}
-        response = requests.post(url, headers=headers, json=data2)
-        print(response.text)
+        #response = requests.post(url, headers=headers, json=data2)
+        #print(response.text)
+data3={
+    "jsonrpc": "2.0",
+    "method": "hostinterface.get",
+    "params": {
+        "output": "extend",
+        "hostids": "10562"
+    },
+    "id": 1
+} 
+response = requests.post(url, headers=headers, json=data3)
+print(response.text)
