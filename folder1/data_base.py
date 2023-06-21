@@ -5,14 +5,14 @@ cnx = mysql.connector.connect(
     host='192.168.0.168',  # Replace with the actual hostname
     user='root',  # Replace with your MySQL username
     password='Qnb1234.',  # Replace with your MySQL password
-    database='MileBix'  # Replace with the name of your MySQL database
+    database='mysql'  # Replace with the name of your MySQL database
 )
 
 # Create a cursor object to interact with the database
 cursor = cnx.cursor()
 
 # Execute a SELECT query
-query = "SELECT * FROM table1"
+query = "SELECT * FROM user"
 cursor.execute(query)
 
 # Fetch all rows returned by the query

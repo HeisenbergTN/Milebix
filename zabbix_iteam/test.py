@@ -1,7 +1,8 @@
 import requests
 import sys
 import json
-filename = r"C:\Users\admin\Desktop\pfe\projet pfe\example.txt"
+
+filename = r"C:\Users\admin\Desktop\Milebix\zabbix_iteam\example.txt"
 addr= "192.168.0.225"
 url="http://192.168.0.212/zabbix/api_jsonrpc.php"
 headers={
