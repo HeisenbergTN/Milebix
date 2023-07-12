@@ -1,65 +1,46 @@
 import csv
 import subprocess
-from typing import Self
 import mysql.connector
 import datetime 
-class srv_hard :
-    def __init__(Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date):
-        Self.Id=Id
-        Self.Name=Name
-        Self.Enabled=Enabled
-        Self.State=State
-        Self.ErrorNoConnection=ErrorNoConnection
-        Self.HardwareName=HardwareName
-        Self.HardwareId=HardwareId
-        Self.Model=Model
-        Self.Address=Address
-        Self.MAC=MAC
-        Self.RecorderName=RecorderName
-        Self.RecorderUri=RecorderUri
-        Self.RecorderId=RecorderId
-        Self.ConfiguredRecordedFPS=ConfiguredRecordedFPS
-        Self.PercentRecordedOneWeek=PercentRecordedOneWeek
-        Self.UsedSpaceInGB=UsedSpaceInGB
-        Self.Date=Date
-        
-def connexion(host ='192.168.0.168' ,user='root', password='Qnb1234.' ,database= 'milebix') :
-     host=host
-     user=user
-     password=password
-     database=database
-     cnx = mysql.connector.connect(host,user,password,database)
-     return (cnx)
-def ajout(conn):
-    cursor=conn.cursor()
-    sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date) VALUES ({Id},{Name},{Enabled},{State},{ErrorNoConnection},{HardwareName},{HardwareId},{Model},{Address},{MAC},{RecorderName},{RecorderUri},{RecorderId},{ConfiguredRecordedFPS},{PercentRecordedOneWeek},{UsedSpaceInGB},{Date})"
-def Identité_hard():
-    #creation d'une liste vide
+
+def item_id(cnx) :
     L=list()
-    conn=connexion('192.168.0.168','root','Qnb1234.','milebix')
-    sql='SELECT Id FROM milebix.zabbix_iteam'
-    cursor=conn.cursor()
+    sql="select Id from zabbix_iteam"
+    cursor=cnx.cursor()
     cursor.execute(sql)
-    rows = cursor.fetchall()
+    rows =cursor.fetchall()
     for row in rows :
-        L.append(row)
+        L.append(row[0])
     cursor.close()
-    conn.close()
-    return L
-connexion('192.168.0.168','root','Qnb1234.','Milebix')  
-#L=Identité_hard()
-#print(L)
-
-
- 
-    
-#with open('test.csv', 'r') as csvfile:
-#    reader = csv.DictReader(csvfile)
-#    x=datetime.datetime.now()
-#    for row in reader:
-#        data={row['Id'],row['Name'],row['Enabled'],row['State'],row['ErrorNoConnection'],row['HardwareName'],row['HardwareId'],row['Model'],row['Address'],row['MAC'],row['RecorderName'],row['RecorderUri'],row['RecorderId'],row['ConfiguredRecordedFPS'],row['PercentRecordedOneWeek'],row['UsedSpaceInGB'],x}
-#        cursor.execute(sql,data)
-#        print(data)
-
-#cursor.execute(sql)
-#cnx.commit()
+    cnx.close()
+    return(L)
+cnx=mysql.connector.connect('127.0.0.1','root','Qnb1234.','milebix')
+ch=item_id(cnx)
+print(ch)
+#def milestone_test() :
+#    L=item_id()
+#   cnx=conexion()
+#    print(cnx)
+# PowerShell 
+ #   command = '$User="qnbts-video\\oussema";$PWord = ConvertTo-SecureString -String "Qnb1234." -AsPlainText -Force;$Credential = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $User, $PWord;Connect-ManagementServer -server  127.0.0.1 -Credential $Credential; Get-VmsCameraReport | Export-Csv -Path "test.csv" -NoTypeInformation'
+  #  subprocess.run(['powershell.exe', '-Command', command])
+   # data = {}
+    #x=datetime.datetime.now()
+    #datetime_string=x.strftime("%Y%m%d%H%M%S")
+    #print (datetime_string)
+    #with open('test.csv', 'r') as csvfile:
+        #reader = csv.DictReader(csvfile)
+        #x=datetime.datetime.now()
+        #for row in reader:
+            #data={"Id":row['Id'],"Name":row['Name'],"Enabled":row['Enabled'],"State":row['State'],"ErrorNoConnection":row['ErrorNoConnection'],"HardwareName":row['HardwareName'],"HardwareId":row['HardwareId'],"Model":row['Model'],"Address":row['Address'],"MAC":row['MAC'],"RecorderName":row['RecorderName'],"RecorderUri":row['RecorderUri'],"RecorderId":row['RecorderId'],"ConfiguredRecordedFPS":row['ConfiguredRecordedFPS'],"PercentRecordedOneWeek":row['PercentRecordedOneWeek'],"UsedSpaceInGB":row['UsedSpaceInGB'],"Date":x}
+            #if (data[0] in L) :
+                #sql = "update zabbix_iteam SET Name ='"+ data['Id']+"',Enabled ='"+ data["Name"]+"',State ='"+ data["State"] + "',ErrorNoConnection ='"+ data["ErrorNoConnection"]+"',HardwareName="+data["HardwareName"]+"',HardwareId='"+data["HardwareId"]+"',Model='"+data["Model"]+"',Address='"+data["Address"]+"',MAC='"+data["MAC"]+"',RecorderName='"+data["RecorderName"]+"',RecorderUri='"+data["RecorderUri"]+"',RecorderId='"+data["RecorderId"]+"',ConfiguredRecordedFPS='"+data["ConfiguredRecordedFPS"]+"',UsedSpaceInGB='"+data["UsedSpaceInGB"]+"',Date='"+data["Date"]+"'" + "where Id ='"+data["Id"]+"'"
+                #conn=connexion()
+                #cursor=conn.cursor()
+                #cursor.execute(sql)
+            #else :
+                #sql="insert into zabbix_iteam (Id,Name,Enabled,State,ErrorNoConnection,HardwareName,HardwareId,Model,Address,MAC,RecorderName,RecorderUri,RecorderId,ConfiguredRecordedFPS,PercentRecordedOneWeek,UsedSpaceInGB,Date) Values('"+ data['Id']+"','"+ data["Name"]+"','"+ data["State"] + "','"+ data["ErrorNoConnection"]+"','"+data["HardwareName"]+"','"+data["HardwareId"]+"','"+data["Model"]+"','"+data["Address"]+"','"+data["MAC"]+"','"+data["RecorderName"]+"','"+data["RecorderUri"]+"','"+data["RecorderId"]+"','"+data["ConfiguredRecordedFPS"]+"','"+data["UsedSpaceInGB"]+"','"+data["Date"]+"')"
+                #conn=connexion()
+                #cursor=conn.cursor()
+                #cursor.execute(sql)
+#milestone_test()
